@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Karakter implements Comparable<Eszkoz>, Cloneable{
+public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable {
 
-    String nev, faj;
-    ArrayList<Eszkoz> eszkozok;
-    boolean rendezes;
+    private String nev, faj;
+    private ArrayList<Eszkoz> eszkozok;
+    private boolean rendezes;
+
+    public Karakter(String nev) {
+        this(nev, "ember");
+    }
 
     public Karakter(String nev, String faj) {
         try {
@@ -57,29 +61,28 @@ public abstract class Karakter implements Comparable<Eszkoz>, Cloneable{
             }
         }
     }
-    public ArrayList<Eszkoz> masolhatoRendez(){
+
+    public ArrayList<Eszkoz> masolhatoRendez() {
         Collections.sort(eszkozok, new NevComparator());
-        return (ArrayList<Eszkoz>) eszkozok.clone(); 
-    } 
+        return (ArrayList<Eszkoz>) eszkozok.clone();
+    }
+
     /*public List<Eszkoz> modosithatatlanRendez(){
         Collections.sort(eszkozok, new NevComparator());
         return Collections.unmodifiableList(eszkozok);
     } */
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        
-        s.append("Karakter{\nHarcos\n\tnev=").append(nev).append("\n\tfaj=").append(faj).append("\n\teszkozok=");
-        if (rendezes){
+
+        s.append("\nKarakter{\nHarcos\n\tnev=").append(nev).append("\n\tfaj=").append(faj).append("\n\teszkozok=");
+        if (rendezes) {
             s.append(masolhatoRendez());
-        } else{
+        } else {
             s.append(eszkozok);
         }
         s.append('}');
         return s.toString();
     }
-    
-    
 
 }
