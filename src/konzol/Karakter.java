@@ -2,7 +2,6 @@ package konzol;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable {
 
@@ -62,10 +61,12 @@ public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable {
         }
     }
 
-    public ArrayList<Eszkoz> masolhatoRendez() {
+    public ArrayList<Eszkoz> rendez() {
         Collections.sort(eszkozok, new NevComparator());
         return (ArrayList<Eszkoz>) eszkozok.clone();
     }
+
+    
 
     /*public List<Eszkoz> modosithatatlanRendez(){
         Collections.sort(eszkozok, new NevComparator());
@@ -77,7 +78,7 @@ public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable {
 
         s.append("\nKarakter{\nHarcos\n\tnev=").append(nev).append("\n\tfaj=").append(faj).append("\n\teszkozok=");
         if (rendezes) {
-            s.append(masolhatoRendez());
+            s.append(rendez());
         } else {
             s.append(eszkozok);
         }
