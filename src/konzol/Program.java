@@ -42,10 +42,10 @@ public class Program {
         //4. feladatrész
         System.out.println(h);
         ment(h);
-        System.out.println("raktar null");
+        System.out.println("harcos null");
         h = null;
-        System.out.println("raktár beolvasva:");
-        h = beolvas();
+        System.out.println("harcos beolvasva:");
+        beolvas();
         System.out.println(h);
 
         //5. feladatrész
@@ -68,48 +68,25 @@ public class Program {
             System.err.println(ex);
         } catch (IOException ex) {
             System.err.println(ex);
-            //Logger.getLogger(AllapotMentes.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*try (ObjectOutputStream objKi = new ObjectOutputStream(new FileOutputStream("harcos.ser"))) {
-            //FileOutputStream fajlKi = new FileOutputStream("raktar.bin");
-            //ObjectOutputStream objKi = new ObjectOutputStream(fajlKi);
-            objKi.writeObject(this);
-            //objKi.close();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
+
     }
 
     private static Harcos beolvas() {
-        Harcos h = null;
-        try (ObjectInputStream objBe = new ObjectInputStream(new FileInputStream("harcos.ser"))) {
-            h = (Harcos) objBe.readObject();
-            return h;
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return h;
-        /*Harcos harcos = null;
+        Harcos harcos = null;
+        
         try {
             FileInputStream fajlBe = new FileInputStream("harcos.ser");
             ObjectInputStream objBe = new ObjectInputStream(fajlBe);
-
             harcos = (Harcos) objBe.readObject();
-            objBe.close();
+            System.out.println(harcos);
+            objBe.close();  
         } catch (FileNotFoundException ex) {
             System.err.println(ex);
-        } catch (IOException ex) {
-            System.err.println(ex);
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex);
-        } finally {
+        } catch (IOException | ClassNotFoundException ex) {
+           System.err.println(ex);
+        }finally{
             return harcos;
-        }*/
+        }
     }
 }

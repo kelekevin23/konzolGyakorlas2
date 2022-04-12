@@ -1,6 +1,8 @@
 package konzol;
 
-public class Eszkoz {
+import java.io.Serializable;
+
+public class Eszkoz implements Serializable{
 
     
     private String nev;

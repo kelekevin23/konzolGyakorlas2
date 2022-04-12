@@ -1,9 +1,10 @@
 package konzol;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable {
+public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable, Serializable {
 
     private String nev, faj;
     private ArrayList<Eszkoz> eszkozok;
