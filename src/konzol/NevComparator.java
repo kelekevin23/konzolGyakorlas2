@@ -12,6 +12,4 @@ public class NevComparator implements Comparator<Eszkoz> {
         return col.compare(egyik.getNev(), masik.getNev());
     }
 
-    
-    
 }

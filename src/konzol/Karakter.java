@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable, Serializable {
+public abstract class Karakter implements Cloneable, Serializable {
 
     private String nev, faj;
     private ArrayList<Eszkoz> eszkozok;
@@ -15,18 +15,15 @@ public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable, Ser
     }
 
     public Karakter(String nev, String faj) {
-        try {
             if (nev.length() < 3) {
-                throw new Exception();
+                new NevException("Nem megfelelő név!");
             } else {
                 this.nev = nev;
                 this.faj = faj;
                 this.eszkozok = new ArrayList<>();
                 this.rendezes = false;
             }
-        } catch (Exception e) {
-            System.err.println("Nem megfelelő név: " + nev);
-        }
+        
 
     }
 
@@ -81,7 +78,7 @@ public abstract class Karakter implements /*Comparable<Eszkoz>,*/ Cloneable, Ser
         if (rendezes) {
             s.append(rendez());
         } else {
-            s.append(eszkozok);
+            s.append(getEszkozok());
         }
         s.append('}');
         return s.toString();

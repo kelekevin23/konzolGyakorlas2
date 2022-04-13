@@ -1,14 +1,9 @@
 package konzol;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
 
-public class Harcos extends Karakter implements Comparable<Harcos>, Serializable {
+public class Harcos extends Karakter implements Comparable<Harcos>, Serializable, Iterable<Eszkoz> {
 
     public static EroComparator RendezEro() {
         return new EroComparator();
@@ -49,6 +44,11 @@ public class Harcos extends Karakter implements Comparable<Harcos>, Serializable
     @Override
     public int compareTo(Harcos o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterator<Eszkoz> iterator() {
+        return super.getEszkozok().iterator();
     }
 
 }

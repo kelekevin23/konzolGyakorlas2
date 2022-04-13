@@ -10,6 +10,4 @@ public class UgyComparator implements Comparator<Harcos> {
         return egyik.getUgyesseg() - masik.getUgyesseg();
     }
 
-    
-    
 }
