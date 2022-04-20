@@ -1,0 +1,8 @@
+Fiúk:
+legidősebb: 35 éves
+összes kor: 100 év
+6 éve dolgozó: Róbert
+Lányok:
+legidősebb: 33 éves
+összes kor: 77 év
+6 éve dolgozó: nincs

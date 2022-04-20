@@ -16,8 +16,8 @@ public class Program {
         ArrayList<Harcos> harcosok = new ArrayList<>();
 
         //1. feladatrész
-        Harcos h = new Harcos("Ke", "ork", 10, 3);
-        //Harcos h = new Harcos("Kevin", "ork", 10, 3);
+        //Harcos h = new Harcos("Ke", "ork", 10, 3);
+        Harcos h = new Harcos("Kevin", "ork", 10, 3);
         Harcos h1 = new Harcos("Béla", 3, 5);
         Harcos h2 = new Harcos("Marci", "troll", 9, 9);
         Harcos h3 = new Harcos("Roli", "mágus", 1, 3);
@@ -28,24 +28,25 @@ public class Program {
         harcosok.add(h3);
 
         //2. feladatrész
-        /*h.felvesz(new Eszkoz("Kalapács", 10));
+        h.felvesz(new Eszkoz("Kalapács", 10));
         h.felvesz(new Eszkoz("Kard", 8));
         h.felvesz(new Eszkoz("Pajzs", 30));
-        h.felvesz(new Eszkoz("Buzogány", 10));*/
-        //System.out.println(h);
-        //h.eldobEszkoz(new Eszkoz("Kard", 8));
-        //h.eldobIndex(1);
+        h.felvesz(new Eszkoz("Buzogány", 10));
+        h.felvesz(new Eszkoz("Kard", 8));
+      /*  System.out.println(h);
+        h.eldobEszkoz(new Eszkoz("Kard", 8));
+        h.eldobIndex(1);
         //h.rendez();
-        //System.out.println(h);
+        System.out.println(h);*/
 
         //3. feladatrész
-        /*for (Eszkoz eszkoz : h) {
+     /*   for (Eszkoz eszkoz : h) {
             System.out.print(eszkoz);
         }
 
         System.out.println("");*/
         //4. feladatrész
-       /* System.out.println(h);
+        /*System.out.println(h);
         ment(h);
         System.out.println("harcos null");
         h = null;

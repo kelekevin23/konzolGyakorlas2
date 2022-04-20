@@ -6,6 +6,9 @@
 package gui;
 
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -37,8 +41,7 @@ public class Emberek extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Emberek.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         for (String line : beolvasLista) {
             String[] tordelve = line.split(";");
             if (!tordelve[0].equals("Név")) {
@@ -277,34 +280,79 @@ public class Emberek extends javax.swing.JFrame {
 
     private void jButtonMentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMentActionPerformed
         String kiir = "";
-        
-        
+        jRadioButtonLany.setActionCommand("Lányok");
+        jRadioButtonFiu.setActionCommand("Fiúk");
+        kiir += buttonGroup1.getSelection().getActionCommand() + ":\n";
+        kiir += jLabelLegidosebb.getText() + " éves\n";
+        kiir += jLabelOsszesKor.getText() + " év\n";
+        kiir += jLabelHatEve.getText() + "\n";
+
+        if (jCheckBoxMindketto.isSelected()) {
+            if (buttonGroup1.getSelection().getActionCommand().equals("Lányok")) {
+                adatKiir('F');
+                //jRadioButtonFiu.setSelected(true);
+                kiir += "Fiúk:\n";
+            } else {
+                adatKiir('L');
+                //jRadioButtonLany.setSelected(true);
+                kiir += "Lányok:\n";
+            }
+            kiir += jLabelLegidosebb.getText() + " éves\n";
+            kiir += jLabelOsszesKor.getText() + " év\n";
+            kiir += jLabelHatEve.getText() + "\n";
+
+            if (buttonGroup1.getSelection().getActionCommand().equals("Lányok")) {
+                adatKiir('L');
+            } else {
+                adatKiir('F');
+            }
+        }
+        /*try {
+            BufferedWriter kiirat = new BufferedWriter(new FileWriter("adatok.txt"));
+            kiirat.write(kiir);
+            kiirat.close();
+            } catch (IOException ex) {
+            Logger.getLogger(Emberek.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+        try {
+            FileWriter myWriter = new FileWriter("adatok.txt");
+            myWriter.write(kiir);
+            myWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Emberek.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println(kiir);
+        SwingUtilities.updateComponentTreeUI(this);
     }//GEN-LAST:event_jButtonMentActionPerformed
 
     public void szemelyKiir(JComboBox<String> honnan) {
         String nev = "";
         if (honnan.getSelectedIndex() != 0) {
             nev = honnan.getSelectedItem().toString();
+        } else {
+            jLabelKor.setText("kor: ");
+            jLabelMiota.setText("mióta dolgozik: ");
         }
         for (int i = 0; i < emberek.size(); i++) {
             if (emberek.get(i).getNev().equals(nev)) {
                 jLabelKor.setText("kor: " + emberek.get(i).getKor());
-                jLabelMiota.setText("mióta dolgzik: " + emberek.get(i).getMunkaEv() + " éve");
+                jLabelMiota.setText("mióta dolgozik: " + emberek.get(i).getMunkaEv() + " éve");
             }
         }
     }
 
     public void adatKiir(char betu) {
         jButtonMent.setEnabled(true);
-        int legidősebb = emberek.get(0).getKor();
+        int legidosebb = 0;
         int osszes = 0;
         String hatEve = "";
         int hatEveTobb = 0;
         for (int i = 0; i < emberek.size(); i++) {
             if (emberek.get(i).getNeme() == betu) {
                 osszes += emberek.get(i).getKor();
-                if (emberek.get(i).getKor() > legidősebb) {
-                    legidősebb = emberek.get(i).getKor();
+                if (emberek.get(i).getKor() > legidosebb) {
+                    legidosebb = emberek.get(i).getKor();
                 }
                 if (emberek.get(i).getMunkaEv() > 6) {
                     if (hatEveTobb > 0) {
@@ -316,7 +364,7 @@ public class Emberek extends javax.swing.JFrame {
             }
         }
 
-        jLabelLegidosebb.setText("legidősebb: " + legidősebb);
+        jLabelLegidosebb.setText("legidősebb: " + legidosebb);
         jLabelOsszesKor.setText("összes kor: " + osszes);
         if (hatEve.equals("")) {
             hatEve = "nincs";

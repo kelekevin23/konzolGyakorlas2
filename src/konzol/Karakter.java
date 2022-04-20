@@ -3,6 +3,7 @@ package konzol;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public abstract class Karakter implements Cloneable, Serializable {
 
@@ -15,15 +16,16 @@ public abstract class Karakter implements Cloneable, Serializable {
     }
 
     public Karakter(String nev, String faj) {
-            if (nev.length() < 3) {
-                new NevException("Nem megfelelő név!");
-            } else {
+        try {
+            if (nev.length() > 3) {
                 this.nev = nev;
                 this.faj = faj;
                 this.eszkozok = new ArrayList<>();
                 this.rendezes = false;
             }
-        
+        } catch (Exception e) {
+            new NevException("Nem megfelelő név!");
+        }
 
     }
 
@@ -50,12 +52,16 @@ public abstract class Karakter implements Cloneable, Serializable {
     public void eldobEszkoz(Eszkoz esz) {
         boolean marVolt = false;
         for (int i = 0; i < eszkozok.size(); i++) {
-            if (eszkozok.get(i).getNev().equals(esz.getNev()) && !marVolt) {
+            if (eszkozok.get(i).equals(esz) && !marVolt) {
+                eldobIndex(i);
+                marVolt = true;
+            }
+            /* if (eszkozok.get(i).getNev().equals(esz.getNev()) && !marVolt) {
                 if (eszkozok.get(i).getSuly() == esz.getSuly()) {
                     eldobIndex(i);
                     marVolt = true;
                 }
-            }
+            }*/
         }
     }
 
@@ -64,12 +70,10 @@ public abstract class Karakter implements Cloneable, Serializable {
         return (ArrayList<Eszkoz>) eszkozok.clone();
     }
 
-    
-
-    /*public List<Eszkoz> modosithatatlanRendez(){
+    public List<Eszkoz> modosithatatlanRendez(){
         Collections.sort(eszkozok, new NevComparator());
         return Collections.unmodifiableList(eszkozok);
-    } */
+    }
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
